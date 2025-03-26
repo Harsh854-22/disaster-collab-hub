@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ResourceType, mockResources } from '@/utils/mockData';
-import { Search, Plus, Water, Home, Pill, Package, Truck, ShoppingBag } from 'lucide-react';
+import { Search, Plus, Droplets, Home, Pill, Package, Truck, ShoppingBag } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 
@@ -17,7 +17,7 @@ const ResourcesPage = () => {
   
   const resourceTypes: { value: ResourceType | 'all'; label: string; icon: React.ReactNode }[] = [
     { value: 'all', label: 'All', icon: <Package className="h-4 w-4" /> },
-    { value: 'water', label: 'Water', icon: <Water className="h-4 w-4" /> },
+    { value: 'water', label: 'Water', icon: <Droplets className="h-4 w-4" /> },
     { value: 'food', label: 'Food', icon: <ShoppingBag className="h-4 w-4" /> },
     { value: 'shelter', label: 'Shelter', icon: <Home className="h-4 w-4" /> },
     { value: 'medical', label: 'Medical', icon: <Pill className="h-4 w-4" /> },

@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Resource, ResourceType } from '@/utils/mockData';
-import { MapPin, Phone, Clock, Shield, Water, Home, Pill, ShoppingBag, Truck, HelpCircle } from 'lucide-react';
+import { MapPin, Phone, Clock, Shield, Droplets, Home, Pill, ShoppingBag, Truck, HelpCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ResourceCardProps {
@@ -32,7 +32,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onViewLocation, c
   // Get icon based on resource type
   const getResourceIcon = (type: ResourceType) => {
     switch (type) {
-      case 'water': return <Water className="h-5 w-5" />;
+      case 'water': return <Droplets className="h-5 w-5" />;
       case 'shelter': return <Home className="h-5 w-5" />;
       case 'medical': return <Pill className="h-5 w-5" />;
       case 'food': return <ShoppingBag className="h-5 w-5" />;
