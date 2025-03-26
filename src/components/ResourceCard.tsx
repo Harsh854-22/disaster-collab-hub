@@ -4,8 +4,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Resource, ResourceType } from '@/utils/mockData';
-import { MapPin, Phone, Clock, Shield, Droplets, Home, Pill, ShoppingBag, Truck, HelpCircle } from 'lucide-react';
+import { MapPin, Phone, Clock, Shield, Droplets, Home, Pill, ShoppingBag, Truck, HelpCircle, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 interface ResourceCardProps {
   resource: Resource;
@@ -14,6 +15,8 @@ interface ResourceCardProps {
 }
 
 const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onViewLocation, className }) => {
+  const { toast } = useToast();
+
   // Format relative time
   const formatRelativeTime = (date: Date) => {
     const now = new Date();
@@ -42,6 +45,21 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onViewLocation, c
     }
   };
 
+  const handleContactProvider = () => {
+    if (resource.contactPhone) {
+      toast({
+        title: "Contact Details",
+        description: `Calling ${resource.name} at ${resource.contactPhone}...`,
+      });
+    } else {
+      toast({
+        title: "No Contact Available",
+        description: "This resource provider has not provided contact information.",
+        variant: "destructive"
+      });
+    }
+  };
+
   return (
     <Card className={cn("w-full overflow-hidden transition-all hover:shadow-soft", className)}>
       <CardHeader className="pb-3">
@@ -50,12 +68,20 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onViewLocation, c
             {getResourceIcon(resource.type)}
             <span className="ml-1">{resource.type}</span>
           </Badge>
-          {resource.verified && (
-            <Badge variant="secondary" className="flex items-center gap-1">
-              <Shield className="h-3 w-3" />
-              Verified
-            </Badge>
-          )}
+          <div className="flex gap-1">
+            {resource.verified && (
+              <Badge variant="secondary" className="flex items-center gap-1">
+                <Shield className="h-3 w-3" />
+                Verified
+              </Badge>
+            )}
+            {resource.available && (
+              <Badge variant="success" className="flex items-center gap-1 bg-green-100 text-green-800 hover:bg-green-200">
+                <CheckCircle className="h-3 w-3" />
+                Available
+              </Badge>
+            )}
+          </div>
         </div>
         <CardTitle className="text-lg mt-2">{resource.name}</CardTitle>
         <CardDescription className="line-clamp-2">{resource.description}</CardDescription>
@@ -78,7 +104,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onViewLocation, c
           </div>
         </div>
       </CardContent>
-      <CardFooter className="pt-2">
+      <CardFooter className="pt-2 flex flex-col space-y-2">
         <Button 
           variant="outline" 
           size="sm" 
@@ -87,6 +113,15 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onViewLocation, c
         >
           <MapPin className="h-4 w-4 mr-2" />
           View on Map
+        </Button>
+        <Button 
+          variant="secondary" 
+          size="sm" 
+          className="w-full" 
+          onClick={handleContactProvider}
+        >
+          <Phone className="h-4 w-4 mr-2" />
+          Contact Provider
         </Button>
       </CardFooter>
     </Card>
