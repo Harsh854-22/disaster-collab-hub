@@ -1,4 +1,3 @@
-
 // Types for our app
 export type EmergencyLevel = 'critical' | 'high' | 'medium' | 'low';
 export type DisasterType = 'flood' | 'earthquake' | 'tsunami' | 'fire' | 'hurricane' | 'other';
@@ -35,6 +34,7 @@ export interface Resource {
   contactPhone?: string;
   timestamp: Date;
   verified: boolean;
+  available: boolean; // Add this new property
 }
 
 export interface EmergencyContact {
@@ -144,7 +144,8 @@ export const mockResources: Resource[] = [
     contactName: 'Relief Coordinator',
     contactPhone: '555-123-4567',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 3), // 3 hours ago
-    verified: true
+    verified: true,
+    available: true
   },
   {
     id: '2',
@@ -159,7 +160,8 @@ export const mockResources: Resource[] = [
     contactName: 'Shelter Manager',
     contactPhone: '555-987-6543',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5), // 5 hours ago
-    verified: true
+    verified: true,
+    available: true
   },
   {
     id: '3',
@@ -174,7 +176,8 @@ export const mockResources: Resource[] = [
     contactName: 'Dr. Rivera',
     contactPhone: '555-111-2222',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
-    verified: true
+    verified: true,
+    available: true
   }
 ];
 

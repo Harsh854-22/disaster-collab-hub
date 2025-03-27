@@ -76,7 +76,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onViewLocation, c
               </Badge>
             )}
             {resource.available && (
-              <Badge variant="success" className="flex items-center gap-1 bg-green-100 text-green-800 hover:bg-green-200">
+              <Badge variant="outline" className="flex items-center gap-1 bg-green-100 text-green-800 hover:bg-green-200">
                 <CheckCircle className="h-3 w-3" />
                 Available
               </Badge>
