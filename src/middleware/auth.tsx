@@ -44,9 +44,11 @@ export const useRequireAuth = () => {
 // Higher order component for protected routes
 export const withAuth = <P extends object>(
   Component: React.ComponentType<P>
-): React.FC<P> => {
-  return (props: P) => {
+) => {
+  const WithAuthComponent: React.FC<P> = (props) => {
     useRequireAuth();
     return <Component {...props} />;
   };
+  
+  return WithAuthComponent;
 };
